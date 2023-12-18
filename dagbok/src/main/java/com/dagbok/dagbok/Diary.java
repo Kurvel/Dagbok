@@ -2,6 +2,8 @@ package com.dagbok.dagbok;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +17,8 @@ public class Diary {
     private int id;
     private String title;
     private String post;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     public int getId() {

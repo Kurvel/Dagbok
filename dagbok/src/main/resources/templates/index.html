@@ -7,8 +7,23 @@
 </head>
 <body>
     <h1>Dagbok</h1>
+    <div>
+        <form method="post" th:action="@{/new-post}">
+            <h3>Rubrik</h3>
+            <input type="text" name="title"><br>
+            <h3>Post</h3>
+            <textarea name="post" cols="30" rows="10"></textarea>
+            <h3>Datum</h3>
+            <input type="date" name="date">
+            <!-- <input type="text" name="date" th:value="${#dates.format(#dates.createNow() , 'yyyy/MMM/dd_HH-mm-ss')}"> -->
+            <button>Spara</button>
+        </form>
+    </div>
     <ul>
-        <li th:each=" diary : ${titles}"><span th:text="${diary.title}"></span></li>
+        <li th:each=" diary : ${titles}">
+            <span th:text="${diary.title}"></span>
+            <a th:href="@{delete(id=${diary.id})}">[X]</a>
+        </li>
     </ul>
 </body>
 </html>
