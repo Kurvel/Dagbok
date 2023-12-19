@@ -25,7 +25,8 @@ public class DiaryController {
 
     @GetMapping
     public String getIndex(Model model) {
-        model.addAttribute("diaryPosts", diaryRepository.findAll());
+        // model.addAttribute("diaryPosts", diaryRepository.findAll());
+        model.addAttribute("diaryPosts", diaryRepository.findCurrentDate());
         return "index";
     }
 
