@@ -8,7 +8,7 @@
 <body>
     <h1>Ändra</h1>
     <div>
-        <form method="post" th:action="@{/new-post}">
+        <form method="post" th:action="@{'/update/' + @{diary.id}}" th:object="${diary}">
             <h3>Rubrik</h3>
             <input type="text" name="title"><br>
             <h3>Post</h3>
@@ -19,9 +19,11 @@
             <button>Spara</button>
         </form>
     </div>
+
+    
     
 
-    <div th:each=" diary : ${diaryPosts}" >
+    <!-- <div th:each=" diary : ${diaryPosts}" >
         <h3>RUBRIK: <span th:text="${diary.title}"></span><br></h3>
         <pre><span th:text="${diary.post}"></span></pre>
         
@@ -31,7 +33,7 @@
             <a th:href="@{delete(id=${diary.id})}">[Ändra]</a>
            
 
-    </div>
+    </div> -->
 
 </body>
 </html>
