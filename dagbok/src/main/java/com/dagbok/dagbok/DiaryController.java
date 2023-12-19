@@ -1,6 +1,7 @@
 package com.dagbok.dagbok;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,7 +19,8 @@ public class DiaryController {
 
     @Autowired
     private DiaryRepository diaryRepository;
-
+    
+    Diary diary = new Diary();
     
 
     @GetMapping
@@ -29,7 +31,9 @@ public class DiaryController {
 
     // @DateTimeFormat(pattern="dd-MMM-YYYY")
     @PostMapping("/new-post")
-    public String addNew(@RequestParam("title") String titleName, @RequestParam("post") String postName, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date postDate) {
+    public String addNew(@RequestParam("title") String titleName,
+    @RequestParam("post") String postName,
+    @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date postDate) {
 
         
         
@@ -55,10 +59,32 @@ public class DiaryController {
         return "redirect:/";
     }
 
-    // @GetMapping("/delete/{id}")
-    // public String delete(@PathVariable int id) {
-    //     System.out.println("delete: " + id);
-    //     diaryRepository.deleteById(id);
-    //     return "redirect:/";
-    // }
+    @GetMapping("/update")
+    public String getUpdate(@RequestParam int id, Model model) {
+        System.out.println("update");
+        model.addAttribute("diaryPosts", diaryRepository.findAll());
+        System.out.println("index: " + id);
+        diary.setId(id);
+        return "/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@RequestParam("title") String titleName, 
+    @RequestParam("post") String postName,
+    @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date postDate, Model model) {
+
+        System.out.println("Ny title från update: " + titleName);
+        System.out.println("Ny post från update: " + postName);
+        System.out.println("Nytt datum från update: " + postDate);
+        int id = diary.getId();
+        System.out.println(id);
+        diaryRepository.updatePost(titleName, postName, postDate, id);
+        
+        
+        
+
+        return "redirect:/";
+     }
+
+     
 }
