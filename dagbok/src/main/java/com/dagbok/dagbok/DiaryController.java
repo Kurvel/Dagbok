@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +23,7 @@ public class DiaryController {
 
     @GetMapping
     public String getIndex(Model model) {
-        model.addAttribute("titles", diaryRepository.findAll());
+        model.addAttribute("diaryPosts", diaryRepository.findAll());
         return "index";
     }
 
@@ -50,6 +51,14 @@ public class DiaryController {
 
         System.out.println("Delete mapping: " + id);
         diaryRepository.deleteById(id);
+        
         return "redirect:/";
     }
+
+    // @GetMapping("/delete/{id}")
+    // public String delete(@PathVariable int id) {
+    //     System.out.println("delete: " + id);
+    //     diaryRepository.deleteById(id);
+    //     return "redirect:/";
+    // }
 }
