@@ -1,6 +1,7 @@
 package com.dagbok.dagbok;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class DiaryController {
     private DiaryRepository diaryRepository;
     
     Diary diary = new Diary();
-    
+    List<Diary> searchResult;
 
     @GetMapping
     public String getIndex(Model model) {
@@ -30,7 +31,7 @@ public class DiaryController {
         return "index";
     }
 
-    // @DateTimeFormat(pattern="dd-MMM-YYYY")
+    
     @PostMapping("/new-post")
     public String addNew(@RequestParam("title") String titleName,
     @RequestParam("post") String postName,
@@ -69,6 +70,7 @@ public class DiaryController {
         return "/update";
     }
 
+    
     @PostMapping("/update/{id}")
     public String update(@RequestParam("title") String titleName, 
     @RequestParam("post") String postName,
@@ -87,5 +89,38 @@ public class DiaryController {
         return "redirect:/";
      }
 
+
+    @GetMapping("/search")
+    public String getSearch(Model model) {
+       
+        model.addAttribute("diaryPosts", getSearchResult());
+        return "/search";
+    }
      
+    @PostMapping("/search")
+    public String search(
+    @RequestParam("fromDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate, @RequestParam("toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
+   
+        System.out.println("Nytt från datum: " + fromDate);
+        System.out.println("Nytt till datum: " + toDate);
+
+        searchResult = diaryRepository.findDatesBetween(fromDate, toDate);
+        setSearchResult(searchResult);
+        return "redirect:/search";
+    }
+
+
+    public List<Diary> getSearchResult() {
+        return searchResult;
+    }
+
+
+    public void setSearchResult(List<Diary> searchResult) {
+        this.searchResult = searchResult;
+    }
+
+
+    
+
+    
 }
