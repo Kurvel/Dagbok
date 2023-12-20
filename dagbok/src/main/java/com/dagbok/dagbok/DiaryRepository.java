@@ -24,4 +24,7 @@ public interface DiaryRepository extends CrudRepository<Diary, Integer> {
     @Query("SELECT d FROM Diary d WHERE d.date <= CURDATE()")
     List<Diary> findCurrentDate();
 
+     @Query("SELECT d FROM Diary d WHERE d.date BETWEEN ?1 AND ?2")
+    List<Diary> findDatesBetween(Date toDate, Date fromDate);
+
 }

@@ -11,19 +11,16 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Sök</h1>
     
-    
-    <h1>Dagbok</h1>
-    <a href="/search">SÖK</a>
     <div>
-        <form method="post" th:action="@{/new-post}">
-            <h3>Rubrik</h3>
-            <input type="text" name="title"><br>
-            <h3>Post</h3>
-            <textarea name="post" cols="30" rows="10"></textarea>
-            <h3>Datum</h3>
-            <input type="date" name="date">
-            <!-- <input type="text" name="date" th:value="${#dates.format(#dates.createNow() , 'yyyy/MMM/dd_HH-mm-ss')}"> -->
+        <form method="post" th:action="@{/search}">
+            
+            <h3>Från datum</h3>
+            <input type="date" name="fromDate">
+            <h3>Till datum</h3>
+            <input type="date" name="toDate">
+            
             <button>Spara</button>
         </form>
     </div>

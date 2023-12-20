@@ -20,6 +20,8 @@ public class Diary {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+    private Date fromDate;
+    private Date toDate;
 
     public int getId() {
         return id;
@@ -53,4 +55,21 @@ public class Diary {
         this.date = date;
     }
 
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    
 }
