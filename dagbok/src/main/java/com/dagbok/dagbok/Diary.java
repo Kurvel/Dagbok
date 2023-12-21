@@ -71,5 +71,4 @@ public class Diary {
         this.toDate = toDate;
     }
 
-    
 }

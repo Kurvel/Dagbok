@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
-<head>
+  <head>
     <style>
-        html {
-  scroll-behavior: smooth;
-}
+      html {
+        scroll-behavior: smooth;
+      }
     </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <h1>Dagbok</h1>
-    <a href="/search">SÖK</a>
-    <div>
-        <form method="post" th:action="@{/new-post}">
-            <h3>Rubrik</h3>
-            <input type="text" name="title"><br>
-            <h3>Post</h3>
-            <textarea name="post" cols="30" rows="10"></textarea>
-            <h3>Datum</h3>
-            <input type="date" name="date">
-            <!-- <input type="text" name="date" th:value="${#dates.format(#dates.createNow() , 'yyyy/MMM/dd_HH-mm-ss')}"> -->
-            <button>Spara</button>
-        </form>
-    </div>
-    
 
-    <div th:each=" diary : ${diaryPosts}" >
-        <h3>RUBRIK: <span th:text="${diary.title}"></span><br></h3>
+    <div id="center">
+      <a href="/search" id="">[SÖK]</a>
+      <form method="post" th:action="@{/new-post}">
+        <h3 id="">Rubrik</h3>
+        <input type="text" name="title" placeholder="Rubrik" required /><br />
+        <h3>Inlägg</h3>
+        <textarea name="post" placeholder="Skriv något...." required></textarea>
+        <h3>Datum</h3>
+        <input type="date" name="date" required />
+
+        <button>Spara</button>
+      </form>
+    </div>
+
+    <div th:each=" diary : ${diaryPosts}" class="flex-container">
+      <div>
+        <h3>RUBRIK: <span th:text="${diary.title}"></span><br /></h3>
+
         <pre><span th:text="${diary.post}"></span></pre>
-        
-            
-            <span th:text="${diary.date}"></span>
-            <a th:href="@{delete(id=${diary.id})}">[X]</a>
-            <a th:href="@{update(id=${diary.id})}">[Ändra]</a>
-           
 
+        <span th:text="${diary.date}"></span>
+        <a th:href="@{delete(id=${diary.id})}">[X]</a>
+        <a th:href="@{update(id=${diary.id})}">[Ändra]</a>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>
