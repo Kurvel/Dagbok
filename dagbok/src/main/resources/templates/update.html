@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <h1>Ändra</h1>
-    <div>
-        <form method="post" th:action="@{'/update/' + @{diary.id}}" th:object="${diary}">
-            <h3>Rubrik</h3>
-            <input type="text" name="title"><br>
-            <h3>Post</h3>
-            <textarea name="post" cols="30" rows="10"></textarea>
-            <h3>Datum</h3>
-            <input type="date" name="date">
-            
-            <button>Spara</button>
-        </form>
+
+    <div id="center">
+      <a href="/">[HOME]</a>
+      <form
+        method="post"
+        th:action="@{'/update/' + @{diary.id}}"
+        th:object="${diary}"
+      >
+        <h3>Rubrik</h3>
+        <input type="text" name="title" required /><br />
+        <h3>Inlägg</h3>
+        <textarea name="post" cols="30" rows="10" required></textarea>
+        <h3>Datum</h3>
+        <input type="date" name="date" required />
+
+        <button>Spara</button>
+      </form>
     </div>
-
-    
-    
-
-    <!-- <div th:each=" diary : ${diaryPosts}" >
-        <h3>RUBRIK: <span th:text="${diary.title}"></span><br></h3>
-        <pre><span th:text="${diary.post}"></span></pre>
-        
-            
-            <span th:text="${diary.date}"></span>
-            <a th:href="@{delete(id=${diary.id})}">[X]</a>
-            <a th:href="@{delete(id=${diary.id})}">[Ändra]</a>
-           
-
-    </div> -->
-
-</body>
+  </body>
 </html>
